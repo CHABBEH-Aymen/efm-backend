@@ -6,15 +6,6 @@ use Modules\pkgProduit\Models\Produit;
 
 class RuleEngine
 {
-
-    public function getProducts()
-    {
-        return Produit::paginate(5);
-    }
-    public function createProduit(array $data)
-    {
-        Produit::create($data);
-    }
     /**
      * Method to execute rules on the provided data
      * @param string $rule
@@ -27,8 +18,12 @@ class RuleEngine
         $prix = $data['prix'];
         // Replace variables in the rule with the actual values from $data
         $rule = str_replace(['stock', 'prix'], [$stock, $prix], $rule);
-
+        try {
+            $result = (bool) eval ('return ' . $rule . ';');
+        } catch (\Throwable $th) {
+            return "error";
+        }
         // Now evaluate the rule using eval (be cautious!)
-        return (bool) eval ('return ' . $rule . ';');
+        return $result;
     }
 }
