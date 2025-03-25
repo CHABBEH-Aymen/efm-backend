@@ -19,9 +19,7 @@ class PkgProduitServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        
         $this->loadViewsFrom(__DIR__."/Views","pkgProduit");
-
         $this->publishes([__DIR__."/Views" => resource_path("views/vendor/pkgproduit")],"PkgProduit-view");
     }
 }

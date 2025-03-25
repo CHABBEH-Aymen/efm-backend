@@ -2,8 +2,19 @@
 
 namespace Modules\pkgProduit\App\Services;
 
+use Modules\pkgProduit\Models\Produit;
+
 class RuleEngine
 {
+
+    public function getProducts()
+    {
+        return Produit::paginate(5);
+    }
+    public function createProduit(array $data)
+    {
+        Produit::create($data);
+    }
     /**
      * Method to execute rules on the provided data
      * @param string $rule

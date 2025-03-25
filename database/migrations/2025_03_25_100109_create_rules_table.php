@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('rules', function (Blueprint $table) {
             $table->id();
+            $table->string("lable");
+            $table->string("expression");
             $table->timestamps();
         });
     }
